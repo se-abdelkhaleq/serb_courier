@@ -1,48 +1,23 @@
-import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
-
 import 'package:flutter/material.dart';
-import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
-import 'package:serb_courier/Local/constants.dart';
+import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
-const List<TabItem> items = [
-  TabItem(
-    icon: Icons.home,
-    // title: 'Home',
-  ),
-  TabItem(
-    icon: Icons.search_sharp,
-    title: 'Shop',
-  ),
-  TabItem(
-    icon: Icons.favorite_border,
-    title: 'Wishlist',
-  ),
-  TabItem(
-    icon: Icons.shopping_cart_outlined,
-    title: 'Cart',
-  ),
-  TabItem(
-    icon: Icons.account_box,
-    title: 'profile',
-  ),
-];
+import 'Local/constants.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+class TestDrawer extends StatelessWidget {
+  const TestDrawer({Key? key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Liquid Shrink SideMenu',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Liquid Ui Shrink SideMenus'),
     );
   }
 }
@@ -57,313 +32,225 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int visit = 0;
-  double height = 30;
-  Color colorSelect =const Color(0XFF0686F8);
-  Color color = const Color(0XFF7AC0FF);
-  Color color2 = const Color(0XFF96B1FD);
-  Color bgColor = const  Color(0XFF1752FE);
+  int _counter = 0;
+  bool isOpened = false;
+
+  final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
+  final GlobalKey<SideMenuState> _endSideMenuKey = GlobalKey<SideMenuState>();
+
+
+
+  toggleMenu([bool end = false]) {
+    if (end) {
+      final _state = _endSideMenuKey.currentState!;
+      if (_state.isOpened) {
+        _state.closeSideMenu();
+      } else {
+        _state.openSideMenu();
+      }
+    } else {
+      final _state = _sideMenuKey.currentState!;
+      if (_state.isOpened) {
+        _state.closeSideMenu();
+      } else {
+        _state.openSideMenu();
+      }
+    }
+  }
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return SideMenu(
+      key: _endSideMenuKey,
+      inverse: true,
+      // end side menu
+      background: Colors.green[700],
+      type: SideMenuType.slideNRotate,
+      menu: Padding(
+        padding: const EdgeInsets.only(left: 25.0),
+        child: buildMenu(),
       ),
-      body: SingleChildScrollView(
-        padding:const EdgeInsets.symmetric(vertical: 20),
-        child: Column(
-          children: [
-            SizedBox(height: height),
-            BottomBarInspiredOutside(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              top: -25,
-              animated: true,
-              itemStyle: ItemStyle.hexagon,
-              chipStyle:const ChipStyle(drawHexagon: true),
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredOutside(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              top: -28,
-              animated: false,
-              itemStyle: ItemStyle.circle,
-              chipStyle:const ChipStyle(notchSmoothness: NotchSmoothness.sharpEdge , background: Colors.black),
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredOutside(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              top: -28,
-              animated: false,
-              itemStyle: ItemStyle.circle,
-              chipStyle:const ChipStyle(notchSmoothness: NotchSmoothness.smoothEdge),
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredOutside(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              top: -28,
-              animated: false,
-              itemStyle: ItemStyle.circle,
-              chipStyle:const ChipStyle(notchSmoothness: NotchSmoothness.verySmoothEdge),
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredOutside(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              top: -28,
-              animated: false,
-              itemStyle: ItemStyle.circle,
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredInside(
-              items: items,
-              backgroundColor: bgColor,
-              color: lightblue,
-              colorSelected: lightblue,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              chipStyle:const ChipStyle(convexBridge: true , background: Colors.white , ),
-              itemStyle: ItemStyle.circle,
+      onChange: (_isOpened) {
+        setState(() => isOpened = _isOpened);
+      },
+      child: SideMenu(
+        key: _sideMenuKey,
+        menu: buildMenu(),
+        type: SideMenuType.slideNRotate,
+        onChange: (_isOpened) {
+          setState(() => isOpened = _isOpened);
+        },
+        child: IgnorePointer(
+          ignoring: isOpened,
+          child: DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: AppBar(
+                title: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 10.0, bottom: 8, left: 8, right: 8),
+                      child: CircleAvatar(
+                          backgroundColor: darkblue,
+                          child:
+                          Text('3', style: TextStyle(color: Colors.white))),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Yasser Morgan'),
 
-              animated: false,
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredInside(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-              animated: false,
-              chipStyle:const ChipStyle(isHexagon: true, convexBridge: true),
-              itemStyle: ItemStyle.hexagon,
-            ),
-            BottomBarFloating(
-              items: items,
-              backgroundColor: bgColor,
-              color: color2,
-              colorSelected: Colors.white,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarCreative(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarCreative(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              highlightStyle:const HighlightStyle(
-                isHexagon: true,
+                  ],
+                ),
+                leading: IconButton(
+                  icon: const Icon(Icons.menu),
+                  onPressed: () => toggleMenu(),
+                ),
+                systemOverlayStyle:
+                    SystemUiOverlayStyle(statusBarColor: HexColor('#63ade1')),
+                backgroundColor: HexColor('#63ade1'),
+                bottom: TabBar(tabs: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    child: Text('My Path'),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    child: Text('History'),
+                  ),
+                ]),
               ),
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarCreative(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              isFloating: true,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarCreative(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              isFloating: true,
-              highlightStyle:const HighlightStyle(sizeLarge: true, background: Colors.red, elevation: 3),
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarCreative(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              isFloating: true,
-              highlightStyle:const HighlightStyle(sizeLarge: true, isHexagon: true, elevation: 2),
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredFancy(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarInspiredFancy(
-              items: items,
-              backgroundColor: Colors.green.withOpacity(0.21),
-              color: color,
-              colorSelected: colorSelect,
-              indexSelected: visit,
-              styleIconFooter: StyleIconFooter.dot,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarDefault(
-              items: items,
-              backgroundColor: Colors.green,
-              color: Colors.white,
-              colorSelected: Colors.orange,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarDefault(
-              items: items,
-              backgroundColor: Colors.green,
-              color: Colors.white,
-              colorSelected: Colors.orange,
-              /*onTap: (int index) => avoidPrint('$index'),*/
-              blur: 50,
-              countStyle:const CountStyle(
-                background: Colors.brown,
+              body: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      'You have pushed the button this many times:',
+                    ),
+                    Text(
+                      '$_counter',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ],
+                ),
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: _incrementCounter,
+                tooltip: 'Increment',
+                child: const Icon(Icons.add),
               ),
             ),
-            SizedBox(height: height),
-            BottomBarDefault(
-              items: items,
-              backgroundColor: Colors.green,
-              color: Colors.white,
-              colorSelected: Colors.orange,
-              iconSize: 40,
-              indexSelected: visit,
-              titleStyle:const TextStyle(fontSize: 18, color: Colors.black),
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarDefault(
-              items: items,
-              backgroundColor: Colors.green,
-              color: Colors.white,
-              colorSelected: Colors.orange,
-              indexSelected: visit,
-              paddingVertical: 25,
-              onTap: (int index) => setState(() {
-                visit = index;
-              }),
-            ),
-            SizedBox(height: height),
-            BottomBarDivider(
-              items: items,
-              backgroundColor: Colors.amber,
-              color: Colors.grey,
-              colorSelected: Colors.blue,
-              indexSelected: visit,
-              onTap: (index) => setState(() {
-                visit = index;
-              }),
-              styleDivider: StyleDivider.bottom,
-              countStyle:const CountStyle(
-                background: Colors.white,
-                color: Colors.purple,
-              ),
-            ),
-            SizedBox(height: height),
-            BottomBarSalomon(
-              items: items,
-              color: Colors.blue,
-              backgroundColor: Colors.white,
-              colorSelected: Colors.white,
-              backgroundSelected: Colors.blue,
-              borderRadius: BorderRadius.circular(0),
-              indexSelected: visit,
-              onTap: (index) => setState(() {
-                visit = index;
-              }),
-            ),
-          ],
+          ),
         ),
       ),
-      bottomNavigationBar: Container(
-        padding:const EdgeInsets.only(bottom: 30, right: 32, left: 32),
-        child: BottomBarFloating(
-          items: items,
-          backgroundColor: Colors.green,
-          color: Colors.white,
-          colorSelected: Colors.orange,
-          indexSelected: visit,
-          paddingVertical: 24,
-          onTap: (int index) => setState(() {
-            visit = index;
-          }),
-        ),
+    );
+  }
+
+  Widget buildMenu() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(vertical: 50.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:  [
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 22.0,
+                  child:Container(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(22),
+                    ),
+                    child:Image.asset('assets/images/avatartwo.png' , width: 35) ,) ,
+                ),
+                SizedBox(height: 16.0),
+                Text(
+                  "Hello, Yasser Morgan",
+                  style: TextStyle(color: Colors.white),
+                ),
+                SizedBox(height: 20.0),
+              ],
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(Icons.home, size: 20.0, color: Colors.white),
+            title: const Text("Confirm path"),
+            textColor: Colors.white,
+            dense: true,
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(Icons.map_outlined,
+                size: 20.0, color: Colors.white),
+            title: const Text("Road Path"),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(FontAwesomeIcons.truck,
+                size: 16.0, color: Colors.white),
+            title: const Text("Delivery process"),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {},
+            leading: const Icon(FontAwesomeIcons.box,
+                size: 20.0, color: Colors.white),
+            title: const Text("Receiving process"),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {},
+            leading:
+                const Icon(Icons.message_outlined, size: 20.0, color: Colors.white),
+            title: const Text("Messages"),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {},
+            leading:
+                const Icon(Icons.settings, size: 20.0, color: Colors.white),
+            title: const Text("Settings"),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+          ListTile(
+            onTap: () {},
+            leading:
+            const Icon(Icons.logout, size: 20.0, color: Colors.white),
+            title: const Text("Log out"),
+            textColor: Colors.white,
+            dense: true,
+
+            // padding: EdgeInsets.zero,
+          ),
+        ],
       ),
     );
   }

@@ -41,6 +41,7 @@ dependencies:
   flutter_bloc: ^7.0.0
   bloc: ^7.0.0
   font_awesome_flutter: ^10.3.0
+  shrink_sidemenu: ^2.0.0+2-null-safety
 
 dev_dependencies:
   flutter_test:
