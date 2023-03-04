@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hexcolor/hexcolor.dart';
+
 import 'package:serb_courier/Home%20Screen/HomeCubit/home_states.dart';
 import 'package:serb_courier/Home%20Screen/path_screen.dart';
 import 'package:serb_courier/Local/constants.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
+
 
 import 'HomeCubit/home_cubit.dart';
 import 'history_screen.dart';
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
+static const String routeName='home';
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }

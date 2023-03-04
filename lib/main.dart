@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serb_courier/Home%20Screen/HomeCubit/home_cubit.dart';
 import 'package:serb_courier/Home%20Screen/HomeCubit/home_states.dart';
 import 'package:serb_courier/Home%20Screen/home_screen.dart';
-import 'package:serb_courier/testNavBar.dart';
+import 'package:serb_courier/history/history_screen.dart';
+import 'package:serb_courier/splash/splash_screen.dart';
 
 import 'Home Screen/HomeCubit/bloc_observer.dart';
+import 'login/login.dart';
+import 'login_screen/login_screen.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
@@ -25,13 +28,22 @@ class MyApp extends StatelessWidget {
         },
         builder: (context, state) {
           return MaterialApp(
-            theme: ThemeData(fontFamily: 'Open_Sans'),
-            home: MyHome(),
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme:ThemeData(fontFamily: 'Open_Sans'),
+
+            routes: {
+              SplashScreen.routeName:(_)=>SplashScreen(),
+              login.routeName:(_)=>login(),
+              LoginScreen.routeName:(_)=>LoginScreen(),
+              HistoryScreen.routeName:(_)=>HistoryScreen(),
+              HomeScreen.routeName:(_)=>HomeScreen(),
+            },
+            initialRoute: SplashScreen.routeName,
           );
         },
       ),
     );
   }
 }
-
 
