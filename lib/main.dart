@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp(
             theme: ThemeData(fontFamily: 'Open_Sans'),
-            home: HomeScreen(),
+            home: MyHome(),
           );
         },
       ),
