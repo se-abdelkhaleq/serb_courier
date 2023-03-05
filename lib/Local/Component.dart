@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:serb_courier/delivery/delivery.dart';
 
-import '../delivery/delivery_success.dart';
 import 'constants.dart';
 
 Widget createTrackingCard(BuildContext context) {
@@ -267,7 +267,7 @@ Widget createTrackingCard(BuildContext context) {
                       ),
                       InkWell(
                         onTap: (){
-Navigator.pushNamed( context, DeliveryDoneSuccess.routeName);
+/*Navigator.pushNamed( context, DeliveryDone.routeName);*/
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
