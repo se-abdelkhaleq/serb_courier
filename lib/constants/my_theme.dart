@@ -11,11 +11,13 @@ class MyTheme {
           iconTheme: IconThemeData(color: Colors.black)),
       textTheme: const TextTheme(
           headline2: TextStyle(
-              fontSize: 24, color: Colors.black, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+              fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600,),
           headline4: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w400,
             color: Colors.black54,
+            overflow: TextOverflow.ellipsis,
           ),
-          subtitle2: TextStyle(fontSize: 14, color: Colors.black)));
+          subtitle2: TextStyle(fontSize: 14, color: Colors.black,  overflow: TextOverflow.ellipsis,)));
 }

@@ -10,8 +10,8 @@ import 'package:serb_courier/Local/constants.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 
+import '../history/history_screen.dart';
 import 'HomeCubit/home_cubit.dart';
-import 'history_screen.dart';
 class HomeScreen extends StatefulWidget {
 static const String routeName='home';
   @override
@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(22),
                     ),
-                    child:Image.asset('assets/images/avatartwo.png' , width: 35) ,) ,
+                    child:Image.asset('assets/images/serb_icon.png' , width: 35) ,) ,
                 ),
                 SizedBox(height: 16.0),
                 Text(

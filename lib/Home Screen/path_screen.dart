@@ -69,7 +69,7 @@ class MyPathScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 10,),
-                createTrackingCard(),
+                createTrackingCard(context),
 
               ],
             ),

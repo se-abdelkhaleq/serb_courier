@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:serb_courier/delivery/delivery.dart';
 
 import 'constants.dart';
 
-Widget createTrackingCard() {
+Widget createTrackingCard(BuildContext context) {
   return Row(
     children: [
       Expanded(
@@ -264,29 +265,34 @@ Widget createTrackingCard() {
                           ),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.done,
-                            size: 20,
-                            color: lightblue,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 4.0),
-                            child: Text('delivery',
-                                maxLines: 1,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: mainDarkColor,
-                                    overflow: TextOverflow.ellipsis,
-                                    fontWeight: FontWeight.bold)),
-                          ),
-                        ],
+                      InkWell(
+                        onTap: (){
+Navigator.pushNamed( context, DeliveryDone.routeName);
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.done,
+                              size: 20,
+                              color: lightblue,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 4.0),
+                              child: Text('delivery',
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      color: mainDarkColor,
+                                      overflow: TextOverflow.ellipsis,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -323,7 +329,7 @@ Widget createThreeMainCard(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/images/serbLogo.png',
+              'assets/images/serb_icon.png',
               width: 50,
               height: 50,
             ),

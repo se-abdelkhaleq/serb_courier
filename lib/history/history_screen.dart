@@ -12,14 +12,14 @@ static const String routeName='history';
       length: 3,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
+     /*   appBar: AppBar(
           backgroundColor: Colors.white,
           title: Text("Today's Job",style: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),),
           centerTitle: true,
           elevation: 0,
 
 
-        ),
+        ),*/
         body :Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(16),
             color: Colors.grey[100],
@@ -87,6 +87,7 @@ SizedBox(height: 22,),
             Expanded(
               child: SizedBox(
                 child: TabBarView(
+
                   children: [
                     PendingScreen(),
                     AcceptedScreen(),

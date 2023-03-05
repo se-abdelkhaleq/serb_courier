@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:serb_courier/Home%20Screen/HomeCubit/home_cubit.dart';
 import 'package:serb_courier/Home%20Screen/HomeCubit/home_states.dart';
 import 'package:serb_courier/Home%20Screen/home_screen.dart';
+import 'package:serb_courier/delivery/delivery.dart';
+import 'package:serb_courier/delivery/not_delivered.dart';
+import 'package:serb_courier/history/delivery_details.dart';
 import 'package:serb_courier/history/history_screen.dart';
 import 'package:serb_courier/splash/splash_screen.dart';
 
@@ -38,6 +41,9 @@ class MyApp extends StatelessWidget {
               LoginScreen.routeName:(_)=>LoginScreen(),
               HistoryScreen.routeName:(_)=>HistoryScreen(),
               HomeScreen.routeName:(_)=>HomeScreen(),
+              DeliveryDetails.routeName:(_)=>DeliveryDetails(),
+              DeliveryDone.routeName:(_)=>DeliveryDone(),
+              NotDelivered.routeName:(_)=>NotDelivered(),
             },
             initialRoute: SplashScreen.routeName,
           );
