@@ -1,26 +1,28 @@
+
+
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:serb_courier/constants/my_theme.dart';
-import 'package:serb_courier/constants/widgets/appbar.dart';
-import 'package:serb_courier/constants/widgets/custom_button.dart';
 import 'package:serb_courier/constants/widgets/custom_dropDown.dart';
-import 'package:serb_courier/constants/widgets/custom_text_form.dart';
 import 'package:signature/signature.dart';
 
+import '../constants/my_theme.dart';
+import '../constants/widgets/appbar.dart';
+import '../constants/widgets/custom_button.dart';
 import '../constants/widgets/custom_dropSearch.dart';
+import '../constants/widgets/custom_text_form.dart';
 
-class NotDelivered extends StatefulWidget {
-  static const String routeName = 'notdelivered';
+class DeliveryDoneSuccess extends StatefulWidget {
+  static const String routeName = 'deliveryDone';
 
   @override
-  State<NotDelivered> createState() => _NotDeliveredState();
+  State<DeliveryDoneSuccess> createState() => _DeliveryDoneSuccessState();
 }
 
-class _NotDeliveredState extends State<NotDelivered> {
+class _DeliveryDoneSuccessState extends State<DeliveryDoneSuccess> {
   TextEditingController toController = TextEditingController();
+  TextEditingController commentController = TextEditingController();
   File? image;
   //Uint8List? exportedImage;
 
@@ -39,77 +41,101 @@ class _NotDeliveredState extends State<NotDelivered> {
         ),
         body: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+
                 children: [
                   Text(
+
                     'Shipment Status',
                     style: MyTheme.lightTheme.textTheme.headline2,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    'not delivered',
-                    style: MyTheme.lightTheme.textTheme.headline4,
-                  ),                  const SizedBox(
-                    height: 30,
+CustomDropDownButton(),
+
+                  const SizedBox(
+                    height: 28,
+                  ),
+                  CustomTextForm(controller: toController, hint: 'to', label: 'to'),
+                  const SizedBox(
+                    height: 12,
                   ),
                   Text(
-                    'Comment (optional)',
+                    textAlign: TextAlign.start,
+                    'Add Photo (optional)',
                     style: MyTheme.lightTheme.textTheme.headline4,
                   ),
-                  CustomdropSearch(
-                    hintText: 'Your Comment',
-                    items: [
-                      'The recipient is not at the delivery location',
-                      'The customer requested to collect it from the Sirb branch',
-                      'Wrong address',
-                      'Delivery time has expired',
-                      'Money is not available',
-                      'no one at home',
-                      'office closed'
+                  selectedImagePath == ''
+                      ? Image.asset(
+                    'assets/images/image_placeholder.png',
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.fill,
+                  )
+                      : Image.file(
+                    File(selectedImagePath),
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.fill,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  CustomButton(
+                      text: 'Select',
+                      function: () async {
+                        selectImage();
+                        setState(() {});
+                      },
+                      width: 80),
+                  const SizedBox(height: 22),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Comment (optional)',
+                        style: MyTheme.lightTheme.textTheme.headline4,
+                      ),
+                      const SizedBox(height: 12),
+
+                      CustomTextForm(controller: commentController, hint: 'your comment', label: '',),
+                      const SizedBox(height: 24),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                ],
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Text(
-                textAlign: TextAlign.start,
-                'Add Photo (optional)',
-                style: MyTheme.lightTheme.textTheme.headline4,
-              ),
-              selectedImagePath == ''
-                  ? Image.asset(
-                      'assets/images/image_placeholder.png',
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.fill,
-                    )
-                  : Image.file(
-                      File(selectedImagePath),
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.fill,
-                    ),
-              SizedBox(
-                height: 20.0,
-              ),
-              CustomButton(
-                  text: 'Select',
-                  function: () async {
-                    selectImage();
-                    setState(() {});
-                  },
-                  width: 80),
 
-              /*   Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Signature',
+                        style: MyTheme.lightTheme.textTheme.headline4,
+                      ),
+                      const SizedBox(height: 10),
+                      Signature(
+                        controller: controller,
+                        width: 350,
+                        height: 200,
+                        backgroundColor: Colors.lightBlue[100]!,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                  CustomButton(
+                      text: 'Clear',
+                      function: () {
+                        controller.clear();
+                      },
+                      width: double.infinity),
+
+
+
+                  /*   Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -136,20 +162,18 @@ class _NotDeliveredState extends State<NotDelivered> {
 
                       ],
                     ),*/
-              SizedBox(
-                height: 10,
-              ),
-              CustomButton(text: 'Save', function: (){}, width: double.infinity),
-
-              /*     if (exportedImage != null)
+                  SizedBox(
+                    height: 10,
+                  ),
+                  /*     if (exportedImage != null)
                       Image.memory(
                         exportedImage!,
                         width: 300,
                         height: 250,
                       )*/
-            ],
-          ),
-        )));
+                ],
+              ),
+            )));
   }
 
   Future selectImage() {
@@ -177,7 +201,7 @@ class _NotDeliveredState extends State<NotDelivered> {
                           child: GestureDetector(
                             onTap: () async {
                               selectedImagePath =
-                                  await selectImageFromGallery();
+                              await selectImageFromGallery();
                               print('Image_Path:-');
                               print(selectedImagePath);
                               if (selectedImagePath != '') {

@@ -12,14 +12,14 @@ import 'package:signature/signature.dart';
 
 import '../constants/widgets/custom_dropSearch.dart';
 
-class NotDelivered extends StatefulWidget {
-  static const String routeName = 'notdelivered';
+class Rejected extends StatefulWidget {
+  static const String routeName = 'rejected';
 
   @override
-  State<NotDelivered> createState() => _NotDeliveredState();
+  State<Rejected> createState() => _RejectedState();
 }
 
-class _NotDeliveredState extends State<NotDelivered> {
+class _RejectedState extends State<Rejected> {
   TextEditingController toController = TextEditingController();
   File? image;
   //Uint8List? exportedImage;
@@ -39,77 +39,77 @@ class _NotDeliveredState extends State<NotDelivered> {
         ),
         body: SingleChildScrollView(
             child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 children: [
-                  Text(
-                    'Shipment Status',
-                    style: MyTheme.lightTheme.textTheme.headline2,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'not delivered',
-                    style: MyTheme.lightTheme.textTheme.headline4,
-                  ),                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Comment (optional)',
-                    style: MyTheme.lightTheme.textTheme.headline4,
-                  ),
-                  CustomdropSearch(
-                    hintText: 'Your Comment',
-                    items: [
-                      'The recipient is not at the delivery location',
-                      'The customer requested to collect it from the Sirb branch',
-                      'Wrong address',
-                      'Delivery time has expired',
-                      'Money is not available',
-                      'no one at home',
-                      'office closed'
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Shipment Status',
+                        style: MyTheme.lightTheme.textTheme.headline2,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Rejected',
+                        style: MyTheme.lightTheme.textTheme.headline4,
+                      ),
+                      //  CustomDropDown(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        'Comment (optional)',
+                        style: MyTheme.lightTheme.textTheme.headline4,
+                      ),
+                      CustomdropSearch(
+                        hintText: 'Your Comment',
+                        items: [
+               'Rejection: money',
+                          'Rejection: being late',
+'Rejection: shipment damage',
+                          'Rejection: another description'
+
+                        ],
+                      ),
+                      const SizedBox(height: 24),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                ],
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Text(
-                textAlign: TextAlign.start,
-                'Add Photo (optional)',
-                style: MyTheme.lightTheme.textTheme.headline4,
-              ),
-              selectedImagePath == ''
-                  ? Image.asset(
-                      'assets/images/image_placeholder.png',
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.fill,
-                    )
-                  : Image.file(
-                      File(selectedImagePath),
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.fill,
-                    ),
-              SizedBox(
-                height: 20.0,
-              ),
-              CustomButton(
-                  text: 'Select',
-                  function: () async {
-                    selectImage();
-                    setState(() {});
-                  },
-                  width: 80),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    textAlign: TextAlign.start,
+                    'Add Photo (optional)',
+                    style: MyTheme.lightTheme.textTheme.headline4,
+                  ),
+                  selectedImagePath == ''
+                      ? Image.asset(
+                    'assets/images/image_placeholder.png',
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.fill,
+                  )
+                      : Image.file(
+                    File(selectedImagePath),
+                    height: 200,
+                    width: 200,
+                    fit: BoxFit.fill,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  CustomButton(
+                      text: 'Select',
+                      function: () async {
+                        selectImage();
+                        setState(() {});
+                      },
+                      width: 80),
 
-              /*   Row(
+                  /*   Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -136,20 +136,19 @@ class _NotDeliveredState extends State<NotDelivered> {
 
                       ],
                     ),*/
-              SizedBox(
-                height: 10,
-              ),
-              CustomButton(text: 'Save', function: (){}, width: double.infinity),
-
-              /*     if (exportedImage != null)
+                  SizedBox(
+                    height: 32,
+                  ),
+                  CustomButton(text: 'Save', function: (){}, width: double.infinity),
+                  /*     if (exportedImage != null)
                       Image.memory(
                         exportedImage!,
                         width: 300,
                         height: 250,
                       )*/
-            ],
-          ),
-        )));
+                ],
+              ),
+            )));
   }
 
   Future selectImage() {
@@ -177,7 +176,7 @@ class _NotDeliveredState extends State<NotDelivered> {
                           child: GestureDetector(
                             onTap: () async {
                               selectedImagePath =
-                                  await selectImageFromGallery();
+                              await selectImageFromGallery();
                               print('Image_Path:-');
                               print(selectedImagePath);
                               if (selectedImagePath != '') {

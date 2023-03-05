@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:serb_courier/constants/constants.dart';
 import 'package:serb_courier/delivery/not_delivered.dart';
-import 'package:serb_courier/login_screen/login_screen.dart';
+import 'package:serb_courier/delivery/rejected.dart';
 
-class CustomDropDown extends StatefulWidget {
+import '../../delivery/delivery_success.dart';
+
+class CustomDropDownButton extends StatefulWidget {
   @override
-  State<CustomDropDown> createState() => _CustomDropDownState();
+  State<CustomDropDownButton> createState() => _CustomDropDownButtonState();
 }
 
-class _CustomDropDownState extends State<CustomDropDown> {
+class _CustomDropDownButtonState extends State<CustomDropDownButton> {
+
   String? _selectedGender;
   List<String> items =  [
     'delivered',
@@ -22,7 +25,6 @@ class _CustomDropDownState extends State<CustomDropDown> {
       child: DropdownButtonHideUnderline(
 
         child: DropdownButton(
-
           iconEnabledColor: darkblue,
 
           iconSize: 35,
@@ -50,12 +52,20 @@ class _CustomDropDownState extends State<CustomDropDown> {
             switch(value){
               case "not been delivered" :
           Navigator.pushNamed(context, NotDelivered.routeName);
+break;
 
+            case "Shipment rejected" :
+          Navigator.pushNamed(context,Rejected.routeName);
+break;
+
+              case "delivered":
+                Navigator.pushNamed(context,DeliveryDoneSuccess.routeName);
+break;
             }
 
           },
-          hint: Text('delivered'),
 
+          hint:Text('delivered'),
 
 
         ),
