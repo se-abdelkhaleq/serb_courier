@@ -8,6 +8,7 @@ import 'package:serb_courier/delivery/not_delivered.dart';
 import 'package:serb_courier/history/delivery_details.dart';
 import 'package:serb_courier/history/history_screen.dart';
 import 'package:serb_courier/splash/splash_screen.dart';
+import 'package:serb_courier/testNavBar.dart';
 
 import 'Home Screen/HomeCubit/bloc_observer.dart';
 import 'login/login.dart';
@@ -34,7 +35,6 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme:ThemeData(fontFamily: 'Open_Sans'),
-
             routes: {
               SplashScreen.routeName:(_)=>SplashScreen(),
               login.routeName:(_)=>login(),

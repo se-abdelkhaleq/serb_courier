@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class MyHome extends StatelessWidget {
-  const MyHome({Key? key}) : super(key: key);
+class MyHomeTest extends StatelessWidget {
+  const MyHomeTest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -293,11 +293,21 @@ import 'package:flutter/material.dart';
 
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-class MyHome extends StatelessWidget {
-  MyHome({Key? key}) : super(key: key);
+import 'Local/constants.dart';
+import 'delivery/delivery.dart';
 
+class MyHomeTest extends StatefulWidget {
+  MyHomeTest({Key? key}) : super(key: key);
+
+  @override
+  State<MyHomeTest> createState() => _MyHomeTestState();
+}
+
+class _MyHomeTestState extends State<MyHomeTest> {
   MobileScannerController cameraController = MobileScannerController();
+
   List<String> myBarcodesList = [];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -352,10 +362,14 @@ class MyHome extends StatelessWidget {
                       final List<Barcode> barcodes = capture.barcodes;
                       for (final barcode in barcodes) {
                         debugPrint('Barcode found! ${barcode.rawValue}');
-                        if(!myBarcodesList.contains(barcode.rawValue)){
+                        if (!myBarcodesList
+                            .contains(barcode.rawValue.toString())) {
                           myBarcodesList.add(barcode.rawValue.toString());
-                          print(myBarcodesList.length);
+                          setState(() {
+
+                          });
                         }
+                        print(myBarcodesList.length);
                       }
                     },
                   ),
@@ -399,15 +413,25 @@ class MyHome extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      child: Container(
-                        child: Center(
-                          child: Text(
-                            textAlign:TextAlign.center ,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            'we are ready to scan next shipment ',
-                            style: TextStyle(fontWeight: FontWeight.bold , fontSize:16),
-                          ),
+                      child: myBarcodesList.length <= 0
+                          ? Container(
+                              child: Center(
+                                child: Text(
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  'we are ready to scan next shipment ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
+                                ),
+                              ),
+                            )
+                          : Container(
+                        child: Column(
+                          children: [
+                            currentShipmentNumCard( )
+                          ],
                         ),
                       ),
                     ),
@@ -419,5 +443,179 @@ class MyHome extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget currentShipmentNumCard(
+      {BuildContext? context, int? indexNumber, String? shipmentNumber}){
+   return Padding(
+     padding: const EdgeInsets.symmetric(horizontal:  8.0),
+     child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              height: 240,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  border: Border.all(
+                    color: mainLightColor,
+                    width: 2,
+                    style: BorderStyle.solid,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text('Tracking number',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis)),
+                        Spacer(),
+                        Text('Number',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis)),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text('#${myBarcodesList[0].toString()}',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w600)),
+                        Spacer(),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: mainLightColor,
+                            border: Border.all(
+                              color: mainLightColor,
+                              width: 2,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '1',
+                              style: TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.circle_outlined,
+                          color: mainDarkColor,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text('New York',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w400)),
+                        Spacer(),
+                        Text('24-9-22 . 10 PM',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w400)),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.circle_outlined,
+                          color: mainDarkColor,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text('London',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w400)),
+                        Spacer(),
+                        Text('25-9-22 . 10 PM',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w400)),
+                      ],
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      children: [
+                        Text('Number of items',
+                            maxLines: 1,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: mainDarkColor,
+                                overflow: TextOverflow.ellipsis,
+                                )),
+                        Spacer(),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: mainLightColor,
+                            border: Border.all(
+                              color: mainLightColor,
+                              width: 2,
+                              style: BorderStyle.solid,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '3',
+                              style: TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+   );
   }
 }

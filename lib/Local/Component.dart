@@ -267,7 +267,7 @@ Widget createTrackingCard(BuildContext context) {
                       ),
                       InkWell(
                         onTap: (){
-Navigator.pushNamed( context, DeliveryDone.routeName);
+/*Navigator.pushNamed( context, DeliveryDone.routeName);*/
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

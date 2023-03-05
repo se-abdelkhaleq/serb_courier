@@ -38,6 +38,7 @@ class login extends StatelessWidget {
 
                       Center(
                         child: Text(
+                          textAlign: TextAlign.center,
                           'This app for registered couriers \nTo continue please login to your courier account ',
                           style: MyTheme.lightTheme.textTheme.headline4,
                           overflow: TextOverflow.clip,
