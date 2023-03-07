@@ -318,7 +318,7 @@ class _MyHomeTestState extends State<MyHomeTest> {
             IconButton(
               color: Colors.white,
               icon: ValueListenableBuilder(
-                valueListenable: cameraController.torchState,
+                valueListenable: cameraController.cameraFacingState,
                 builder: (context, state, child) {
                   switch (state as TorchState) {
                     case TorchState.off:

@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:serb_courier/constants/constants.dart';
 
 import '../Local/Component.dart';
+import '../barcodeScreens/barcode_screen.dart';
 import '../testNavBar.dart';
 class MyPathScreen extends StatelessWidget {
   const MyPathScreen({Key? key}) : super(key: key);
@@ -17,11 +18,11 @@ class MyPathScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton(
+           floatingActionButton:cubit.isFloatingScanShow ? FloatingActionButton(
             backgroundColor: lightblue,
             onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => MyHomeTest()));
-            } , child: Icon(Icons.qr_code_2_sharp , color: Colors.white),),
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => BarcodeScannerScreen()));
+            } , child: Icon(Icons.qr_code_2_sharp , color: Colors.white),) :Container(),
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Padding(

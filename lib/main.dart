@@ -35,7 +35,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme:ThemeData(fontFamily: 'Open_Sans'),
-            routes: {
+            home: HomeScreen(),
+            /*routes: {
               SplashScreen.routeName:(_)=>SplashScreen(),
               login.routeName:(_)=>login(),
               LoginScreen.routeName:(_)=>LoginScreen(),
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
               DeliveryDetails.routeName:(_)=>DeliveryDetails(),
               DeliveryDone.routeName:(_)=>DeliveryDone(),
               NotDelivered.routeName:(_)=>NotDelivered(),
-            },
+            },*/
             initialRoute: SplashScreen.routeName,
           );
         },
