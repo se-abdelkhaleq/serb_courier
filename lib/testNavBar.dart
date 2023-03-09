@@ -294,7 +294,6 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 import 'Local/constants.dart';
-import 'delivery/delivery.dart';
 
 class MyHomeTest extends StatefulWidget {
   MyHomeTest({Key? key}) : super(key: key);

@@ -30,6 +30,7 @@ class _DeliveryDoneSuccessState extends State<DeliveryDoneSuccess> {
   SignatureController controller = SignatureController(
     penStrokeWidth: 3,
     penColor: Colors.white,
+
     exportBackgroundColor: Colors.yellowAccent,
   );
   @override
@@ -45,15 +46,20 @@ class _DeliveryDoneSuccessState extends State<DeliveryDoneSuccess> {
               child: Column(
 
                 children: [
-                  Text(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
 
-                    'Shipment Status',
-                    style: MyTheme.lightTheme.textTheme.headline2,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                        'Shipment Status',
+                        style: MyTheme.lightTheme.textTheme.headline2,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
 CustomDropDownButton(),
+                    ],
+                  ),
 
                   const SizedBox(
                     height: 28,
@@ -115,11 +121,15 @@ CustomDropDownButton(),
                         style: MyTheme.lightTheme.textTheme.headline4,
                       ),
                       const SizedBox(height: 10),
-                      Signature(
-                        controller: controller,
-                        width: 350,
-                        height: 200,
-                        backgroundColor: Colors.lightBlue[100]!,
+                      Container(
+                        
+                        child: Signature(
+                          controller: controller,
+                          width: 350,
+                          height: 200,
+
+                          backgroundColor: Colors.lightBlue[100]!,
+                        ),
                       ),
                       const SizedBox(
                         height: 20,

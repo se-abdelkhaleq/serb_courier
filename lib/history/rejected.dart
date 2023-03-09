@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:serb_courier/constants/widgets/custom_button.dart';
 
 import '../constants/constants.dart';
+import '../delivery/delivery_success.dart';
 
-class RejectedScreen extends StatelessWidget {
+class RejectedScreen extends StatefulWidget {
   const RejectedScreen({Key? key}) : super(key: key);
 
   @override
+  State<RejectedScreen> createState() => _RejectedScreenState();
+}
+
+class _RejectedScreenState extends State<RejectedScreen> {
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(itemBuilder: (context,index)=>createTrackingCard(),itemCount: 10),
+      body: ListView.builder(
+          itemBuilder: (context, index) => createTrackingCard(index+1), itemCount: 10),
     );
   }
-  Widget createTrackingCard() {
+
+  Widget createTrackingCard(index) {
     return Row(
       children: [
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 280,
+              height: 290,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -36,7 +46,7 @@ class RejectedScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text('Tracking number',
+                        Text('Tracking number ${index+1}',
                             maxLines: 1,
                             style: TextStyle(
                                 fontSize: 16,
@@ -62,23 +72,9 @@ class RejectedScreen extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 fontWeight: FontWeight.w600)),
                         Spacer(),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: darkblue,
-                            border: Border.all(
-                              color: darkblue,
-                              width: 2,
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Rejected',
-                              style: TextStyle(fontSize: 16, color: Colors.white),
-                            ),
-                          ),
-                        ),
+                      CustomButton(text: 'Rejected', function: (){
+                        Navigator.pushNamed(context, DeliveryDoneSuccess.routeName);
+                      }, width: 60),
                       ],
                     ),
                     SizedBox(height: 10),
@@ -176,7 +172,6 @@ class RejectedScreen extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -203,7 +198,6 @@ class RejectedScreen extends StatelessWidget {
                             ),
                           ),
                           Expanded(
-
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -238,13 +232,11 @@ class RejectedScreen extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-
                     Container(
                       width: double.infinity,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,

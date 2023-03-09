@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:serb_courier/constants/constants.dart';
 import 'package:serb_courier/history/accepted.dart';
-import 'package:serb_courier/history/pending.dart';
+import 'package:serb_courier/history/pending/pending.dart';
 import 'package:serb_courier/history/rejected.dart';
 
 class HistoryScreen extends StatelessWidget {

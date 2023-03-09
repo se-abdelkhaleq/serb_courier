@@ -7,6 +7,7 @@ import 'package:serb_courier/delivery/not_delivered.dart';
 import 'package:serb_courier/delivery/rejected.dart';
 import 'package:serb_courier/history/delivery_details.dart';
 import 'package:serb_courier/history/history_screen.dart';
+import 'package:serb_courier/history/pending/pending_cubit/pending_cubit.dart';
 import 'package:serb_courier/splash/splash_screen.dart';
 import 'package:serb_courier/testNavBar.dart';
 
@@ -17,7 +18,19 @@ import 'login_screen/login_screen.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider<HomeCubit>(
+          create: (_) => HomeCubit(),
+        ),
+        BlocProvider<PendingCubit>(
+          create: (_) => PendingCubit(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -47,7 +60,7 @@ class MyApp extends StatelessWidget {
               NotDelivered.routeName:(_)=>NotDelivered(),
               Rejected.routeName:(_)=>Rejected(),
             },
-            initialRoute: DeliveryDoneSuccess.routeName,
+            initialRoute: SplashScreen.routeName,
           );
         },
       ),

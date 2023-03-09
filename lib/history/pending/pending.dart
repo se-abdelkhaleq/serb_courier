@@ -1,24 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:serb_courier/constants/my_theme.dart';
+import 'package:serb_courier/constants/widgets/custom_button.dart';
+import 'package:serb_courier/history/delivery_details.dart';
 import 'package:serb_courier/history/pending/pending_cubit/pending_cubit.dart';
+import 'package:serb_courier/history/rejected.dart';
+import '../../Home Screen/home_screen.dart';
+import '../../Home Screen/path_screen.dart';
+import '../../constants/constants.dart';
 
-import '../constants/constants.dart';
-import '../constants/my_theme.dart';
-import '../constants/widgets/custom_button.dart';
-import 'delivery_details.dart';
+class PendingScreen extends StatefulWidget {
 
-class AcceptedScreen extends StatelessWidget {
-  const AcceptedScreen({Key? key}) : super(key: key);
+
+
+  @override
+  State<PendingScreen> createState() => _PendingScreenState();
+}
+
+class _PendingScreenState extends State<PendingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(itemBuilder: (context,index)=>createTrackingCard(context),itemCount:5),
+    return BlocConsumer<PendingCubit,PendingState>(
+    listener: (context ,State){},
+    builder: (context,State){
+      var cubit=PendingCubit.get(context);
+
+      return  Scaffold(
+      body: ListView.builder(
+      itemBuilder: (context, index) => createTrackingCard(index),
+    itemCount: cubit.trackingNum.length),
     );
+    });
   }
-  Widget createTrackingCard(BuildContext context) {
 
+  Widget createTrackingCard(int index) {
 
+    return BlocConsumer<PendingCubit,PendingState>(
+      listener: (context,State){
+
+      },
+      builder: (context,State){
+        var Cubit=PendingCubit.get(context);
 
         return Row(
           children: [
@@ -57,7 +80,7 @@ Navigator.push(
                                   maxLines: 1,
                                   style: MyTheme.lightTheme.textTheme.headline2),
                               Spacer(),
-                              Text('#45345363',
+                              Text(Cubit.trackingNum[index],
                                   maxLines: 1,
                                   style: TextStyle(
                                       fontSize: 16,
@@ -70,6 +93,7 @@ Navigator.push(
                         SizedBox(height: 10),
                         InkWell(
                           onTap: () {
+                            Navigator.pushNamed(context, DeliveryDetails.routeName);
                           },
                           child: InkWell(
                             child: Row(
@@ -126,9 +150,11 @@ Navigator.push(
                           children: [
                             Spacer(),
                             CustomButton(
-                              text: 'Accepted',
+                              text: 'Pending',
                               function: () {
-
+                                Cubit.selectedCurrentIndex(index);
+                                Navigator.pushNamed(
+                                    context, DeliveryDetails.routeName);
                               },
                               width: 50,
                             ),
@@ -141,8 +167,8 @@ Navigator.push(
               ),
             ),
           ],
-
-
+        );
+      },
     );
   }
 

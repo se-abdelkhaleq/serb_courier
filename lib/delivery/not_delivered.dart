@@ -1,13 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:serb_courier/constants/my_theme.dart';
 import 'package:serb_courier/constants/widgets/appbar.dart';
 import 'package:serb_courier/constants/widgets/custom_button.dart';
-import 'package:serb_courier/constants/widgets/custom_dropDown.dart';
-import 'package:serb_courier/constants/widgets/custom_text_form.dart';
 import 'package:signature/signature.dart';
 
 import '../constants/widgets/custom_dropSearch.dart';
@@ -65,8 +61,8 @@ class _NotDeliveredState extends State<NotDelivered> {
                   CustomdropSearch(
                     hintText: 'Your Comment',
                     items: [
-                      'The recipient is not at the delivery location',
-                      'The customer requested to collect it from the Sirb branch',
+                      'The receiver is not at the delivery location',
+                      'The customer requested to collect it from the Serb branch',
                       'Wrong address',
                       'Delivery time has expired',
                       'Money is not available',
